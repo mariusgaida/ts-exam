@@ -1,50 +1,76 @@
-import LandVehicle from './land-vehicle.js';
-import AirVehicle from './air-vehicle.js';
-import WaterVehicle from './water-vehicle.js';
+import WorkPerson from './entities/work-person.js';
+import SelfEmployedPerson from './entities/self-employed-person.js';
+import BuisnessLicencePerson from './entities/business-license-person.js';
+import Employee from './entities/employee.js';
+import Job from './entities/job.js';
 
-const vehicles: (LandVehicle | AirVehicle | WaterVehicle)[] = [
-  new LandVehicle({
-    tires: ['Brand1', 'Brand2', 'Brand3'],
-  }, {
-    brand: 'Vehicle1',
-    model: 'Model1',
-    year: 2015,
-  }),
-  new LandVehicle({
-    tires: ['Brand1', 'Brand2', 'Brand3'],
-  }, {
-    brand: 'Vehicle2',
-    model: 'Model2',
-    year: 2010,
-  }),
-  new AirVehicle({
-    maxAltitude: 9000,
-  }, {
-    brand: 'Jet1',
-    model: 'JetModel1',
-    year: 2015,
-  }),
-  new AirVehicle({
-    maxAltitude: 7000,
-  }, {
-    brand: 'Jet2',
-    model: 'JetModel2',
-    year: 2012,
-  }),
-  new WaterVehicle({
-    maxDepth: 50,
-  }, {
-    brand: 'Water1',
-    model: 'WaterModel1',
-    year: 2011,
-  }),
-  new WaterVehicle({
-    maxDepth: 90,
-  }, {
-    brand: 'Water2',
-    model: 'WaterModel2',
-    year: 2021,
-  }),
+const backendDeveloper = new WorkPerson({
+  id: '25169845878',
+  name: 'Apsas',
+  surname: 'Revestenis',
+  hourPay: 25,
+  fullTimeEquivalent: 1,
+});
+const frontendDeveloper = new WorkPerson({
+  id: '25167745878',
+  name: 'Eventas',
+  surname: 'Klikauskas',
+  hourPay: 25,
+  fullTimeEquivalent: 0.5,
+});
+
+const selfEmployed1 = new SelfEmployedPerson({
+  id: '25169845878',
+  name: 'Beribė',
+  surname: 'Jūračka',
+  hourPay: 25,
+  hoursWorked: 10,
+});
+const selfEmployed2 = new SelfEmployedPerson({
+  id: '25169145878',
+  name: 'Fanalijus',
+  surname: 'Analijus',
+  hourPay: 10,
+});
+
+const designer = new BuisnessLicencePerson({
+  id: '15169845878',
+  name: 'Plunksytė',
+  surname: 'Krupštytė',
+});
+
+const jobs = [
+  new Job('Facebook adds', 200),
+  new Job('Google adds', 700),
+  new Job('Twitter adds', 400),
 ];
 
-vehicles.forEach((v) => console.log(v.toString()));
+jobs[0].completeJob();
+jobs[2].completeJob();
+
+const marketingSpecialist = new BuisnessLicencePerson({
+  id: '15169845878',
+  name: 'Protenis',
+  surname: 'Knistauskenis',
+  jobs,
+});
+
+const employees: Employee[] = [
+  backendDeveloper,
+  frontendDeveloper,
+  selfEmployed1,
+  selfEmployed2,
+  designer,
+  marketingSpecialist,
+];
+
+console.group('1. Atspausdinkite visus darbuotojus');
+employees.forEach((emp) => console.log(emp.toString()));
+console.groupEnd();
+
+console.group('2. Atspausdinkite visų darbuotojų atlyginimus');
+employees.forEach((emp) => {
+  console.log(emp.getPersonInfo());
+  console.log(emp.calcPay());
+});
+console.groupEnd();

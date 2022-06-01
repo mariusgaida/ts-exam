@@ -3,52 +3,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const land_vehicle_js_1 = __importDefault(require("./land-vehicle.js"));
-const air_vehicle_js_1 = __importDefault(require("./air-vehicle.js"));
-const water_vehicle_js_1 = __importDefault(require("./water-vehicle.js"));
-const vehicles = [
-    new land_vehicle_js_1.default({
-        tires: ['Brand1', 'Brand2', 'Brand3'],
-    }, {
-        brand: 'Vehicle1',
-        model: 'Model1',
-        year: 2015,
-    }),
-    new land_vehicle_js_1.default({
-        tires: ['Brand1', 'Brand2', 'Brand3'],
-    }, {
-        brand: 'Vehicle2',
-        model: 'Model2',
-        year: 2010,
-    }),
-    new air_vehicle_js_1.default({
-        maxAltitude: 9000,
-    }, {
-        brand: 'Jet1',
-        model: 'JetModel1',
-        year: 2015,
-    }),
-    new air_vehicle_js_1.default({
-        maxAltitude: 7000,
-    }, {
-        brand: 'Jet2',
-        model: 'JetModel2',
-        year: 2012,
-    }),
-    new water_vehicle_js_1.default({
-        maxDepth: 50,
-    }, {
-        brand: 'Water1',
-        model: 'WaterModel1',
-        year: 2011,
-    }),
-    new water_vehicle_js_1.default({
-        maxDepth: 90,
-    }, {
-        brand: 'Water2',
-        model: 'WaterModel2',
-        year: 2021,
-    }),
+const work_person_js_1 = __importDefault(require("./entities/work-person.js"));
+const self_employed_person_js_1 = __importDefault(require("./entities/self-employed-person.js"));
+const business_license_person_js_1 = __importDefault(require("./entities/business-license-person.js"));
+const job_js_1 = __importDefault(require("./entities/job.js"));
+const backendDeveloper = new work_person_js_1.default({
+    id: '25169845878',
+    name: 'Apsas',
+    surname: 'Revestenis',
+    hourPay: 25,
+    fullTimeEquivalent: 1,
+});
+const frontendDeveloper = new work_person_js_1.default({
+    id: '25167745878',
+    name: 'Eventas',
+    surname: 'Klikauskas',
+    hourPay: 25,
+    fullTimeEquivalent: 0.5,
+});
+const selfEmployed1 = new self_employed_person_js_1.default({
+    id: '25169845878',
+    name: 'Beribė',
+    surname: 'Jūračka',
+    hourPay: 25,
+    hoursWorked: 10,
+});
+const selfEmployed2 = new self_employed_person_js_1.default({
+    id: '25169145878',
+    name: 'Fanalijus',
+    surname: 'Analijus',
+    hourPay: 10,
+});
+const designer = new business_license_person_js_1.default({
+    id: '15169845878',
+    name: 'Plunksytė',
+    surname: 'Krupštytė',
+});
+const jobs = [
+    new job_js_1.default('Facebook adds', 200),
+    new job_js_1.default('Google adds', 700),
+    new job_js_1.default('Twitter adds', 400),
 ];
-vehicles.forEach((v) => console.log(v.toString()));
+jobs[0].completeJob();
+jobs[2].completeJob();
+const marketingSpecialist = new business_license_person_js_1.default({
+    id: '15169845878',
+    name: 'Protenis',
+    surname: 'Knistauskenis',
+    jobs,
+});
+const employees = [
+    backendDeveloper,
+    frontendDeveloper,
+    selfEmployed1,
+    selfEmployed2,
+    designer,
+    marketingSpecialist,
+];
+console.group('1. Atspausdinkite visus darbuotojus');
+employees.forEach((emp) => console.log(emp.toString()));
+console.groupEnd();
+console.group('2. Atspausdinkite visų darbuotojų atlyginimus');
+employees.forEach((emp) => {
+    console.log(emp.getPersonInfo());
+    console.log(emp.calcPay());
+});
+console.groupEnd();
 //# sourceMappingURL=main.js.map
