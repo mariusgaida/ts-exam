@@ -7,76 +7,152 @@ type Person = {
   weight?: number,
 };
 
-const person1: Person = {
+const numData: number[] = [1, 2, 3, 4, 5, 6];
+const names: Array<string> = ['Jagnita', 'Kimparas', 'Pitonkas', 'Fasalija'];
+const people: Person[] = [{
   id: '39304075689',
   name: 'Verundijus',
   surname: 'Bauda',
   age: 51,
-};
-
-const person2: Person = {
+}, {
   id: '39304075689',
   name: 'Ryja',
   surname: 'Žaneirytė',
   age: 41,
   height: 1.65,
   weight: 55,
-};
-
-const person3: Person = {
+}, {
   id: '39304075689',
   name: 'Brudas',
   surname: 'Veilokas',
   age: 11,
   height: 1.45,
   weight: 45,
+}];
+
+type CreatePeopleArrayFunction = (p1: Person, p2: Person) => Person[];
+
+const printStrings = (strings: string[]): void => {
+  const printString = (str: string): void => console.log(str);
+
+  strings.forEach(printString);
 };
 
-type CreateFullname = (person: Person) => string;
-const createFullname: CreateFullname = ({ name, surname }) => `${name} ${surname}`;
+const sumNumbers = (nums: Array<number>): number => {
+  const numberSumReducer = (sum: number, num: number): number => sum + num;
 
-const printCouple = (p1: Person, p2: Person): void => {
-  const p1Fullname = createFullname(p1);
-  const p2Fullname = createFullname(p2);
-  console.log(`${p1Fullname} + ${p2Fullname} = ❤`);
+  return nums.reduce(numberSumReducer, 0);
 };
 
-printCouple(person1, person2);
+const createPeopleArray: CreatePeopleArrayFunction = (p1, p2) => [p1, p2];
 
-console.group('1. Sukurkite funkciją kuri patikrina ar žmogus yra pilnametis');
+console.group('Panaudojimo pavyzdžiai:');
 {
-  const isAdult = (p: Person): boolean => p.age >= 18;
+  console.group('printStrings');
+  {
+    printStrings(names);
+  }
+  console.groupEnd();
 
-  console.log({
-    [createFullname(person1)]: isAdult(person1),
-    [createFullname(person2)]: isAdult(person2),
-    [createFullname(person3)]: isAdult(person3),
-  });
+  console.group('sumNumbers');
+  {
+    const result: number = sumNumbers(numData);
+    console.log({
+      numbers: numData,
+      result,
+    });
+  }
+  console.groupEnd();
+
+  console.group('createPeopleArray');
+  {
+    const couple: Array<Person> = createPeopleArray(people[0], people[1]);
+    console.log(couple);
+  }
+  console.groupEnd();
 }
 console.groupEnd();
 
-console.group('2. Sukurkite funkciją, kuri patikrina ar Person tipo objektas turi ūgį ir svorį');
+console.group('Užduotys');
 {
-  type IsFullyDescribedPerson = (p: Person) => boolean;
+  console.group('1. Aprašykite funkcijoms ir kintamiesiems tipus');
+  {
+    const numbers: number[] = [1, -8, -6, 7, 5, 1];
 
-  const isFullyDescribedPerson: IsFullyDescribedPerson = (person) => Boolean(person.height) && Boolean(person.weight);
+    function addPositiveNumbers(arr: number[]) {
+      const positiveNumberReducer = (sum: number, num: number) => (num > 0 ? sum + num : sum);
 
-  console.log({
-    [createFullname(person1)]: isFullyDescribedPerson(person1),
-    [createFullname(person2)]: isFullyDescribedPerson(person2),
-    [createFullname(person3)]: isFullyDescribedPerson(person3),
-  });
-}
-console.groupEnd();
+      return arr.reduce<number>(positiveNumberReducer, 0);
+    }
 
-console.group('3. Sukurkite funkciją, kuri grąžina žmogaus incialus');
-{
-  const createInitials = (p: Person) => p.name[0] + p.surname[0];
+    console.log({
+      numbers,
+      sumOfPositiveNumbers: addPositiveNumbers(numbers),
+    });
+  }
+  console.groupEnd();
 
-  console.log({
-    [createFullname(person1)]: createInitials(person1),
-    [createFullname(person2)]: createInitials(person2),
-    [createFullname(person3)]: createInitials(person3),
-  });
+  console.group('2. Sukurkite ir tipais aprašykite funkciją, kuri sudarytų string\'ą iš string\'ų masyvo elementų pirmųjų raidžių');
+  {
+    const acronymReducer = (acronym: string, word: string) => acronym + word[0];
+
+    const createAcronym = (words: string[]): string => {
+      const acronym = words.reduce<string>(acronymReducer, '');
+      return acronym;
+    };
+
+    const dataSamples: string[][] = [
+      ['Lietuviškas', 'Nepriklausomas', 'Kanalas'],
+      ['Lietuvos', 'Respublikos', 'Televizija'],
+      ['Loughing', 'Out', 'Loud'],
+    ];
+
+    dataSamples.forEach((words: string[]) => console.log(`[${words.join(', ')}] -> ${createAcronym(words)}`));
+  }
+  console.groupEnd();
+
+  console.group('3. Sukurkite ir tipais aprašykite funkciją, kuri saudaugintų visus number masyvo skaičius');
+  {
+    type NumbersMultiplyReducer = (product: number, factor: number) => number;
+    type MultiplyNumbers = (numbers: Array<number>) => number;
+
+    const numbersProductReducer: NumbersMultiplyReducer = (product, factor) => product * factor;
+
+    const multiplyNumbers: MultiplyNumbers = (numbers) => numbers.reduce<number>(numbersProductReducer, 1);
+
+    type AnswerObject = {
+      [key: string]: number,
+    };
+
+    type FormatAnswerObject = (samples: Array<Array<number>>) => AnswerObject;
+
+    type AnswerObjectReducer = (answerObject: AnswerObject, numbers: Array<number>) => AnswerObject;
+
+    const samples: Array<Array<number>> = [
+      [1, 7, 8],
+      [98, 74, 5, 0],
+      [17, 10, 5],
+    ];
+
+    const answerObjectReducer: AnswerObjectReducer = (answerObject, numbers) => {
+      const functionName: string = multiplyNumbers.name;
+      const functionArgsString: string = `[${numbers.join(', ')}]`;
+      const key: string = `${functionName}(${functionArgsString})`;
+      const value: number = multiplyNumbers(numbers);
+      answerObject[key] = value;
+      return answerObject;
+    };
+
+    const formatAnswerObject: FormatAnswerObject = (samples) => {
+      const initialValue: AnswerObject = {};
+      const result: AnswerObject = samples.reduce<AnswerObject>(answerObjectReducer, initialValue);
+      return result;
+    };
+
+    const answerObject: AnswerObject = formatAnswerObject(samples);
+
+    console.log(answerObject);
+  }
+  console.groupEnd();
 }
 console.groupEnd();
