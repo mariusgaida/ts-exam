@@ -1,59 +1,94 @@
-type PossibleType = string | number;
+type Latvia = 'Latvia';
+type Lithuania = 'Lithuania';
+type Estonia = 'Estonia';
+const country: Latvia = 'Latvia';
 
-const someNumber: PossibleType = 17 as number;
-const title: PossibleType = 'Grace' as string;
+type BalticCountry = Latvia | Lithuania | Estonia;
+const country2 = 'Estonia';
 
-const formAddUser: HTMLFormElement = document.querySelector('#form-add-user') as HTMLFormElement;
-formAddUser.onsubmit = (e) => {
-  e.preventDefault();
-  console.log('Ateityje pridėsiu vartotoją');
+type HttpType = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+
+type HttpRequest = {
+  url: string,
+  headers?: {
+    [key: string]: string,
+  },
+  body?: {
+    [key: string]: string,
+  }
+  method: HttpType,
+};
+
+const req1 = {
+  url: 'https://tavo-veidas.lt',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  method: 'GET',
+};
+
+const req2 = {
+  url: 'https://tavo-veidas.lt/api/',
+  headers: {
+    Authorization: 'Bearer fhdguisdf8g76sdf89ghf5..?sfg',
+    'Content-Type': 'application/json',
+  },
+  body: {
+    image: 'https://i.pinimg.com/474x/67/0a/1d/670a1d06e7bff426ec343e8c06c93ca5--crazy-faces-strange-people.jpg',
+  },
+  method: 'POST',
 };
 
 // Alikite užduotis, ir atspausdinkite savo sprendimo pavyzdžius užduoties blokuose
-console.group('Assertions - užduotys');
+console.group('Literal types - užduotys');
 {
   // ↓↓↓↓ Tipus ir užduotims bendrus kintamuosius apraškite čia ↓↓↓↓
-  // Tipai:
-  type EventHandler = (e: MouseEvent) => void;
-  // Bendrai naudojami kintamieji:
-  const btn: HTMLButtonElement = document.querySelector('#button') as HTMLButtonElement;
+  type Berlin = 'Berlin';
+  type Hamburg = 'Hamburg';
+  type Munich = 'Munich';
+  type Cologne = 'Cologne';
+  type Frankfurt = 'Frankfurt';
+  type GermanyCity = Berlin | Hamburg | Munich | Cologne | Frankfurt;
+
+  type Doberman = 'Doberman';
+  type ChowChow = 'ChowChow';
+  type Dalmantin = 'Dalmantin';
+  type Buldog = 'Buldog';
+  type Mops = 'Mops';
+  type Breed = Doberman | ChowChow | Dalmantin | Buldog | Mops;
+
+  type Engine = 'Engine';
+  type Trasmission = 'Trasmission';
+  type Wheel = 'Wheel';
+  type FuelTank = 'FuelTank';
+  type FuelFilter = 'FuelFilter';
+  type CarPart = Engine | Trasmission | Wheel | FuelTank | FuelFilter;
 
   // ↑↑↑↑ Tipus ir užduotims bendrus kintamuosius apraškite čia ↑↑↑↑
 
-  console.group('1. Sukurkite HTML mygtuką ir uždėkite jam įvykio klausiklį, jog paspaudus, būt spausdinamas tekstas "paspausta!"');
+  console.group('1. Sukurkite konkrečius 5 dižiausių Vokietijos miestų tipus. Sukurkite tipą, kurio reikšmė būtų viena iš miestų.');
   {
-    const printTextOnClick: EventHandler = () => console.log('paspausta!');
+    const city1: GermanyCity = 'Munich';
+    const city2: GermanyCity = 'Hamburg';
 
-    btn.addEventListener('click', printTextOnClick);
+    console.log({ city1, city2 });
   }
   console.groupEnd();
 
-  console.group('2. Sukurkite <div> elementą ir papildikyte jo turinį mažu kvadaratėliu kiekvieną kart, kuomet paspaudžiamas [1.] mygtukas');
+  console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
   {
-    const squareContainer: HTMLDivElement = document.querySelector('#sq-container') as HTMLDivElement;
-    squareContainer.style.width = 'fit-content';
-    const addSquare: EventHandler = () => {
-      const sq: HTMLSpanElement = document.createElement('span');
-      sq.className = 'sq';
-      squareContainer.append(sq);
-      sq.textContent = 'sq';
-    };
+    const breed1: Breed = 'Dalmantin';
+    const breed2: Breed = 'Mops';
 
-    btn.addEventListener('click', addSquare);
+    console.log({ breed1, breed2 });
   }
   console.groupEnd();
 
-  console.group('3. Sukurkite <p> elementą kuriame spausdinsite skaičių - kiek kvadratėlių yra [2.] konteineryje');
+  console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
   {
-    const countContainer: HTMLParagraphElement = document.querySelector('#count-container') as HTMLParagraphElement;
+    const parts: CarPart[] = ['Engine', 'Wheel', 'Trasmission'];
 
-    let sqCount: number = 0;
-    const incSqCount: EventHandler = () => {
-      sqCount++;
-      countContainer.innerHTML = `Kvadratų skaičius: ${sqCount}`;
-    };
-
-    btn.addEventListener('click', incSqCount);
+    console.log(parts);
   }
   console.groupEnd();
 }

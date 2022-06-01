@@ -1,42 +1,44 @@
 "use strict";
-const someNumber = 17;
-const title = 'Grace';
-const formAddUser = document.querySelector('#form-add-user');
-formAddUser.onsubmit = (e) => {
-    e.preventDefault();
-    console.log('Ateityje pridėsiu vartotoją');
+const country = 'Latvia';
+const country2 = 'Estonia';
+const req1 = {
+    url: 'https://tavo-veidas.lt',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    method: 'GET',
 };
-console.group('Assertions - užduotys');
+const req2 = {
+    url: 'https://tavo-veidas.lt/api/',
+    headers: {
+        Authorization: 'Bearer fhdguisdf8g76sdf89ghf5..?sfg',
+        'Content-Type': 'application/json',
+    },
+    body: {
+        image: 'https://i.pinimg.com/474x/67/0a/1d/670a1d06e7bff426ec343e8c06c93ca5--crazy-faces-strange-people.jpg',
+    },
+    method: 'POST',
+};
+console.group('Literal types - užduotys');
 {
-    const btn = document.querySelector('#button');
-    console.group('1. Sukurkite HTML mygtuką ir uždėkite jam įvykio klausiklį, jog paspaudus, būt spausdinamas tekstas "paspausta!"');
+    console.group('1. Sukurkite konkrečius 5 dižiausių Vokietijos miestų tipus. Sukurkite tipą, kurio reikšmė būtų viena iš miestų.');
     {
-        const printTextOnClick = () => console.log('paspausta!');
-        btn.addEventListener('click', printTextOnClick);
+        const city1 = 'Munich';
+        const city2 = 'Hamburg';
+        console.log({ city1, city2 });
     }
     console.groupEnd();
-    console.group('2. Sukurkite <div> elementą ir papildikyte jo turinį mažu kvadaratėliu kiekvieną kart, kuomet paspaudžiamas [1.] mygtukas');
+    console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
     {
-        const squareContainer = document.querySelector('#sq-container');
-        squareContainer.style.width = 'fit-content';
-        const addSquare = () => {
-            const sq = document.createElement('span');
-            sq.className = 'sq';
-            squareContainer.append(sq);
-            sq.textContent = 'sq';
-        };
-        btn.addEventListener('click', addSquare);
+        const breed1 = 'Dalmantin';
+        const breed2 = 'Mops';
+        console.log({ breed1, breed2 });
     }
     console.groupEnd();
-    console.group('3. Sukurkite <p> elementą kuriame spausdinsite skaičių - kiek kvadratėlių yra [2.] konteineryje');
+    console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
     {
-        const countContainer = document.querySelector('#count-container');
-        let sqCount = 0;
-        const incSqCount = () => {
-            sqCount++;
-            countContainer.innerHTML = `Kvadratų skaičius: ${sqCount}`;
-        };
-        btn.addEventListener('click', incSqCount);
+        const parts = ['Engine', 'Wheel', 'Trasmission'];
+        console.log(parts);
     }
     console.groupEnd();
 }
