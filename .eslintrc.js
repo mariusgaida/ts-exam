@@ -11,12 +11,14 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: './tsconfig.json'
   },
   plugins: [
     '@typescript-eslint',
   ],
   rules: {
-    'react/jsx-filename-extension': [0],
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": [2],
+    "@typescript-eslint/indent": [0]
   },
 };
