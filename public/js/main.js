@@ -1,194 +1,127 @@
 "use strict";
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-const people = [
-    {
-        name: 'Jonas',
-        surname: 'Jonaitis',
-        sex: 'male',
-        age: 26,
-        income: 1200,
-        married: false,
-        hasCar: false,
-    },
-    {
-        name: 'Severija',
-        surname: 'Piktutytė',
-        sex: 'female',
-        age: 26,
-        income: 1300,
-        married: false,
-        hasCar: true,
-    },
-    {
-        name: 'Valdas',
-        surname: 'Vilktorinas',
-        sex: 'male',
-        age: 16,
-        income: 0,
-        married: false,
-        hasCar: false,
-    },
-    {
-        name: 'Virginijus',
-        surname: 'Uostauskas',
-        sex: 'male',
-        age: 32,
-        income: 2400,
-        married: true,
-        hasCar: true,
-    },
-    {
-        name: 'Samanta',
-        surname: 'Uostauskienė',
-        sex: 'female',
-        age: 28,
-        income: 1200,
-        married: true,
-        hasCar: true,
-    },
-    {
-        name: 'Janina',
-        surname: 'Stalautinskienė',
-        sex: 'female',
-        age: 72,
-        income: 364,
-        married: false,
-        hasCar: false,
-    },
-];
-console.groupCollapsed('1. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {name: string, surname: string} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą');
+const numbers = [1, 2, 3, 4, 5, 6, 7];
+const strings = ['pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
+const booleans = [true, true, true, true, false];
+console.group('1. Parašykite funkciją, kuri grąžina pirmą masyvo elementą.');
 {
-    const personToIdentity = ({ name, surname }) => ({ name, surname });
-    const identities = people.map(personToIdentity);
-    console.table(people);
-    console.table(identities);
+    const firstElem = (arr) => arr[0];
+    console.log({ numbers, result: firstElem(numbers) });
+    console.log({ strings, result: firstElem(strings) });
+    console.log({ booleans, result: firstElem(booleans) });
 }
 console.groupEnd();
-console.groupCollapsed('2. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {married: boolean, hasCar: boolean} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą.');
+console.group('2. Parašykite funkciją, kuri grąžina paskutinį masyvo elementą.');
 {
-    const selectTaskProps = ({ married, hasCar }) => ({
-        married: Boolean(married),
-        hasCar: Boolean(hasCar),
+    const lastElem = (arr) => arr[arr.length - 1];
+    console.log({ numbers, result: lastElem(numbers) });
+    console.log({ strings, result: lastElem(strings) });
+    console.log({ booleans, result: lastElem(booleans) });
+}
+console.groupEnd();
+console.group('3. Parašykite funkciją, kuri grąžina vienarūšių primityvių reikšmių masyvo kopiją');
+{
+    const exact = (arr) => {
+        const copy = arr.map((x) => x);
+        return copy;
+    };
+    console.log({ numbers, result: exact(numbers) });
+    console.log({ strings, result: exact(strings) });
+    console.log({ booleans, result: exact(booleans) });
+}
+console.groupEnd();
+console.group('4. Parašykite funkciją,  kuri pirmu parametru priima string | number | boolen, grąžina to tipo masyvą su perduota reikšme tiek kartų, kiek nurodyta antru parametru');
+{
+    const arr = (value, count) => Array.from(new Array(count)).map((_) => value);
+    const dataSamples = [
+        ['a', 2],
+        [77, 4],
+        [true, 1],
+    ];
+    dataSamples.forEach((args) => console.log(`arr(${args.join(', ')}):`, arr(...args)));
+}
+console.groupEnd();
+console.group('5. Parašykite funkciją, kuri sujungia tokių pat tipų masyvus į vieną masyvą');
+{
+    const union = (arr1, arr2) => [...arr1, ...arr2];
+    const args1 = [[6, 5, 4], [3, 2, 1]];
+    const args2 = [['text1', 'text2', 'text3'], ['text4', 'text5', 'text6']];
+    const args3 = [[true, true, true], [false, false, false]];
+    console.log({ args: args1, result: union(...args1) });
+    console.log({ args: args2, result: union(...args2) });
+    console.log({ args: args3, result: union(...args3) });
+}
+console.groupEnd();
+console.group('6. Parašykite funkciją, kuri priimtų bet kokią reikšmę ir grąžintų objektą su savybėmis-funkcijomis "setValue" - reikšmei nustatyti ir "getValue" tai reikšmei nustatyti. Funkcijai perduota reikšmė neturi būti pasiekiama tiesiogiai.');
+{
+    const getObj = (initialValue) => {
+        let value = initialValue;
+        return {
+            setValue: (newValue) => value = newValue,
+            getValue: () => value,
+        };
+    };
+    const value1 = 7;
+    const value2 = ['text1', 'text2', 'text3'];
+    const value3 = { name: 'name', surname: 'surname' };
+    const obj1 = getObj(value1);
+    const obj2 = getObj(value2);
+    const obj3 = getObj(value3);
+    console.log('initial values');
+    console.log({
+        value1: obj1.getValue(),
+        value2: obj2.getValue(),
+        value3: obj3.getValue(),
     });
-    const result = people.map(selectTaskProps);
-    console.table(people);
-    console.table(result);
+    console.log('changing values...');
+    obj1.setValue(9);
+    obj2.setValue(['Pakeista']);
+    obj3.setValue({ name: 'Pakaitalas', surname: 'Fuflo' });
 }
 console.groupEnd();
-console.groupCollapsed('3. Sukurtite masyvą su vardais, pavardėmis ir lytimi, pagal pradinį žmonių masyvą');
+console.group(`
+  7. Turite 2 tipus: Student ir Worker kurie pasižymi bendrais bruožais Person. 
+  Parašykite 2 funkcijas <isStudent> ir <isWorker> skirtas atpažinti koks objektas buvo perduotas.
+  Sukūrę tokias funkcijas iteruokite per žmonių masyvą, sugrupuodami elementus pagal tipą`);
 {
-    const selectTaskProps = ({ name, surname, sex }) => ({
-        name, surname, sex,
-    });
-    const result = people.map(selectTaskProps);
-    console.table(people);
-    console.table(result);
-}
-console.groupEnd();
-console.groupCollapsed('4. Suformuokite visų vyrų masyvą');
-{
-    const isMale = ({ sex }) => sex === 'male';
-    const males = people.filter(isMale);
-    console.table(people);
-    console.table(males);
-}
-console.groupEnd();
-console.groupCollapsed('5. Suformuokite visų moterų masyvą');
-{
-    const isFemale = ({ sex }) => sex === 'female';
-    const females = people.filter(isFemale);
-    console.table(people);
-    console.table(females);
-}
-console.groupEnd();
-console.groupCollapsed('6. Suformuokite objektų masyvą su žmonių vardais ir pavardėm, kurie turi mašinas');
-{
-    const personHasCar = ({ hasCar }) => Boolean(hasCar);
-    const createIdentity = ({ name, surname }) => ({ name, surname });
-    const identityReducer = (result, { hasCar, name, surname }) => {
-        if (hasCar)
-            result.push({ name, surname });
-        return result;
+    const isWorker = (person) => person.avgMonthlyPay !== undefined;
+    const isStudent = (person) => {
+        const student = person;
+        return student.university !== undefined && student.course !== undefined;
     };
-    const peopleWithCars = people.filter(personHasCar);
-    const indentities = peopleWithCars.map(createIdentity);
-    const identitiess2 = people.reduce(identityReducer, []);
-    console.table(people);
-    console.table(indentities);
-    console.table(identitiess2);
-}
-console.groupEnd();
-console.groupCollapsed('7. Suformuokite objektų masyvą iš žmonių kurie yra susituokę');
-{
-    const marriedReducer = (result, person) => {
-        if (person.married)
-            result.push(person);
-        return result;
+    const combined = (people) => {
+        const groupedPeople = people.reduce((prevGroupedPeople, person) => {
+            const newGroupedPeople = Object.assign({}, prevGroupedPeople);
+            if (isWorker(person))
+                newGroupedPeople.workers.push(person);
+            if (isStudent(person))
+                newGroupedPeople.students.push(person);
+            else
+                newGroupedPeople.people.push(person);
+            return newGroupedPeople;
+        }, {
+            people: [],
+            students: [],
+            workers: [],
+        });
+        return groupedPeople;
     };
-    const marriedPeople = people.reduce(marriedReducer, []);
-    console.table(people);
-    console.table(marriedPeople);
+    const people = [
+        {
+            name: 'Name1', surname: 'Surname1', university: 'VU', course: 3,
+        },
+        { name: 'Name2', surname: 'Surname2' },
+        { name: 'Name3', surname: 'Surname3', avgMonthlyPay: 1500 },
+        { name: 'Name4', surname: 'Surname4' },
+        { name: 'Name5', surname: 'Surname5', avgMonthlyPay: 800 },
+        {
+            name: 'Name6', surname: 'Surname6', university: 'VU', course: 2,
+        },
+        { name: 'Name7', surname: 'Surname7', avgMonthlyPay: 2500 },
+        {
+            name: 'Name8', surname: 'Surname8', university: 'KTU', course: 1,
+        },
+    ];
+    const groupedPeople = combined(people);
+    console.log(groupedPeople);
 }
-console.groupEnd();
-console.groupCollapsed('8. Sukurkite objektą, kuriame būtų apskaičiuotas vairuojančių žmonių kiekis pagal lytį');
-{
-    const groupCarOwnersBySexReducer = (result, person) => {
-        if (!person.hasCar)
-            return result;
-        if (!result[person.sex])
-            result[person.sex] = 0;
-        result[person.sex] = result[person.sex] + 1;
-        return result;
-    };
-    const groupedPeopleBySex = people.reduce(groupCarOwnersBySexReducer, {});
-    console.table(people);
-    console.log(groupedPeopleBySex);
-}
-console.groupEnd();
-console.groupCollapsed('9. Performuokite žmonių masyvą, jog kiekvieno žmogaus savybė "income", taptų "salary"');
-{
-    const convertToBritish = (_a) => {
-        var { income } = _a, person = __rest(_a, ["income"]);
-        const result = Object.assign({}, person);
-        if (income)
-            result.salary = income;
-        return result;
-    };
-    const britishPeople = people.map(convertToBritish);
-    console.table(people);
-    console.table(britishPeople);
-}
-console.groupEnd();
-console.groupCollapsed('10. Suformuokite žmonių masyvą, kuriame nebūtų lyties, vardo ir pavardės');
-{
-    const createAnonymous = (_a) => {
-        var { name, surname, sex } = _a, anonPerson = __rest(_a, ["name", "surname", "sex"]);
-        return anonPerson;
-    };
-    const anonymousPeople = people.map(createAnonymous);
-    console.table(people);
-    console.table(anonymousPeople);
-}
-console.groupEnd();
-console.groupCollapsed('11. Suformuokite žmonių masyvą, kuriame "name" ir "surname" savybės, būtų pakeistos "fullname" savybe');
-{
-    const createFullnamePerson = (_a) => {
-        var { name, surname } = _a, rest = __rest(_a, ["name", "surname"]);
-        return (Object.assign(Object.assign({}, rest), { fullname: `${name} ${surname}` }));
-    };
-    const fullnamePeople = people.map(createFullnamePerson);
-    console.table(people);
-    console.table(fullnamePeople);
-}
-console.groupEnd();
 //# sourceMappingURL=main.js.map
