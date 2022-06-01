@@ -1,52 +1,214 @@
-console.group('1 - https://edabit.com/challenge/nuXdWHAoHv9y38sn7');
+const numbers: number[] = [1, 2, -2, 6, -5, 9, 1.02, 45, -69, 77, -12, 2, 8, -2, -4, 59, 7, -3];
+const words: string[] = ['pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
+
+console.group('1. Parašykite funkciją, kuri atspausdina paskutinio masyvo elemento indeksą');
 {
-  type Drink = {
-    name: string,
-    price: number,
-  };
+  function solution(arr: any[]): void {
+    console.log(arr.length - 1);
+  }
 
-  const sortDrinksByPriceASC = (drink1: Drink, drink2: Drink): number => drink1.price - drink2.price;
+  console.log(numbers);
+  solution(numbers);
 
-  const solution = (drinks: Array<Drink>): Array<Drink> => [...drinks].sort(sortDrinksByPriceASC);
-
-  const drinks: Drink[] = [
-    { name: 'lemonade', price: 50 },
-    { name: 'fanta', price: 30 },
-    { name: 'lime', price: 10 },
-  ];
-
-  const sortedDrinks: Drink[] = solution(drinks);
-
-  console.log({
-    drinks,
-    sortedDrinks,
-  });
+  console.log(words);
+  solution(words);
 }
 console.groupEnd();
 
-console.group('2 - https://edabit.com/challenge/9KEKJG5PZTFmG3Zau');
+console.group('2. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indeksus eilutėmis');
 {
-  type ItemObj = {
-    [key: string]: number,
-  };
+  function solution(arr: any[]): void {
+    for (let i = 0; i < arr.length; i++) console.log(i);
+  }
 
-  const solution = (itemObj: ItemObj, itemName: string, itemValue: number): ItemObj => ({
-    ...itemObj,
-    [itemName]: itemValue,
-  });
+  console.log(numbers);
+  solution(numbers);
 
-  type SolutionArgs = [ItemObj, string, number];
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
 
-  const solutionArgs1: SolutionArgs = [{}, 'Brutus', 300];
-  const solutionArgs2: SolutionArgs = [{ piano: 500 }, 'Brutus', 400];
-  const solutionArgs3: SolutionArgs = [{ piano: 500, stereo: 300 }, 'Caligula', 440];
+console.group('3. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento reikšmes eilutėmis');
+{
+  function solution(arr: any[]): void {
+    for (let i = 0; i < arr.length; i++) console.log(arr[i]);
+  }
 
-  const result1: ItemObj = solution(...solutionArgs1);
-  const result2: ItemObj = solution(...solutionArgs2);
-  const result3: ItemObj = solution(...solutionArgs3);
+  console.log(numbers);
+  solution(numbers);
 
-  console.log(solutionArgs1, result1);
-  console.log(solutionArgs2, result2);
-  console.log(solutionArgs3, result3);
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('4. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indekso ir reikšmių poras eilutėmis, tokiu formatu:  ');
+{
+  function solution(arr: any[]): void {
+    for (let i = 0; i < arr.length; i++) console.log(`[${i}] => ${arr[i]}`);
+  }
+
+  console.log(numbers);
+  solution(numbers);
+
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('5. Parašykite funkciją, kuri atspausdina masyvo elementus atbuline tvarka eilutėmis, iš galo.');
+{
+  function solution(arr: any[]): void {
+    for (let i = arr.length - 1; i >= 0; i--) console.log(arr[i]);
+  }
+
+  console.log(numbers);
+  solution(numbers);
+
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('6. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indeksus vienoje eilutėje: 0 1 2 3 ...');
+{
+  function solution(arr: any[]): void {
+    const res = arr.map((_, i) => i).join(' ');
+    console.log(res);
+  }
+
+  console.log(numbers);
+  solution(numbers);
+
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('7. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento reikšmes vienoje eilutėje: -111 2 -9 48 ...');
+{
+  function solution(arr: any[]): void {
+    const res = arr.join(' ');
+    console.log(res);
+    // console.log(...arr);
+  }
+
+  console.log(numbers);
+  solution(numbers);
+
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('8. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indekso ir reikšmių poras vienoje eilutėje, tokiu formatu:');
+{
+  function solution(arr: any[]): void {
+    const res = arr.map((x, i) => `[${i}]=>${x}`).join(', ');
+    console.log(res);
+  }
+
+  console.log(numbers);
+  solution(numbers);
+
+  console.log(words);
+  solution(words);
+}
+console.groupEnd();
+
+console.group('9. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų padaugintų iš 2');
+{
+  function solution(arr: number[]): number[] {
+    return arr.map((x) => x * 2);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('10. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų pakeltų kvadratu');
+{
+  function solution(arr: number[]): number[] {
+    return arr.map((x) => x ** 2);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('11. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų ir jų indeksų sandaugos');
+{
+  function solution(arr: number[]): number[] {
+    return arr.map((x, i) => x * i);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('12. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo teigiamų elementų');
+{
+  function solution(arr: number[]): number[] {
+    return arr.filter((x) => x > 0);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('13. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo NE-teigiamų elementų');
+{
+  function solution(arr: number[]): number[] {
+    return arr.filter((x) => x <= 0);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('14. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo lyginių elementų');
+{
+  function solution(arr: number[]): number[] {
+    return arr.filter((x) => x % 2 === 0);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('15. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo nelyginių elementų');
+{
+  function solution(arr: number[]): number[] {
+    return arr.filter((x) => Math.abs(x) % 2 === 1);
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
+}
+console.groupEnd();
+
+console.group('16. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo, paverstų teigiamais, elementų');
+{
+  function solution(arr: number[]): number[] {
+    return arr.map((x) => (x < 0 ? x * -1 : x));
+  }
+
+  const result = solution(numbers);
+  console.log(numbers);
+  console.log(result);
 }
 console.groupEnd();
