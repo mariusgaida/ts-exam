@@ -1,68 +1,59 @@
-type FullnameTuple = [string, string];
-type UseNumericStateTuple = [number, (num?: number) => void];
+type PossibleType = string | number;
 
-const person1: FullnameTuple = ['Koridas', 'Atmazas'];
-const person2: FullnameTuple = ['Paklodijus', 'Pagalvė'];
-const person3: FullnameTuple = ['Višta', 'Maumedienė'];
+const someNumber: PossibleType = 17 as number;
+const title: PossibleType = 'Grace' as string;
 
-let currentAge: number = 18;
-let currentHeight: number = 180;
-const age: UseNumericStateTuple = [currentAge, () => currentAge += 1];
-const height: UseNumericStateTuple = [currentAge, (h) => {
-  if (h) currentHeight = h;
-}];
+const formAddUser: HTMLFormElement = document.querySelector('#form-add-user') as HTMLFormElement;
+formAddUser.onsubmit = (e) => {
+  e.preventDefault();
+  console.log('Ateityje pridėsiu vartotoją');
+};
 
-console.group('Tuples - užduotys');
+// Alikite užduotis, ir atspausdinkite savo sprendimo pavyzdžius užduoties blokuose
+console.group('Assertions - užduotys');
 {
-  // ↓↓↓↓ Tipus apraškite čia ↓↓↓↓
-  type FirstTuple = [string, number];
-  type Dog = {
-    name: string,
-    age: number,
-    brand: 'type1' | 'type2',
-  };
-  type DogOwner = {
-    name: string,
-    age: number,
-  };
-  type ComplectTuple = [DogOwner, Dog];
-  type Acme = [number, number];
-  type Triangle = [Acme, Acme, Acme];
-  // ↑↑↑↑ Tipus apraškite čia ↑↑↑↑
+  // ↓↓↓↓ Tipus ir užduotims bendrus kintamuosius apraškite čia ↓↓↓↓
+  // Tipai:
+  type EventHandler = (e: MouseEvent) => void;
+  // Bendrai naudojami kintamieji:
+  const btn: HTMLButtonElement = document.querySelector('#button') as HTMLButtonElement;
 
-  console.group('1. Sukurkite žmogaus vardo ir amžiaus rinkinį');
+  // ↑↑↑↑ Tipus ir užduotims bendrus kintamuosius apraškite čia ↑↑↑↑
+
+  console.group('1. Sukurkite HTML mygtuką ir uždėkite jam įvykio klausiklį, jog paspaudus, būt spausdinamas tekstas "paspausta!"');
   {
-    const personTuple1: FirstTuple = ['Name', 35];
-    const personTuple2: FirstTuple = ['Name2', 45];
+    const printTextOnClick: EventHandler = () => console.log('paspausta!');
 
-    console.log(personTuple1, personTuple2);
+    btn.addEventListener('click', printTextOnClick);
   }
   console.groupEnd();
 
-  console.group('2. Sukurkite šuns šeimininko ir šuns rinkinį(pradžioje teks sukurti Šuns ir Šeiminiko tipus)');
+  console.group('2. Sukurkite <div> elementą ir papildikyte jo turinį mažu kvadaratėliu kiekvieną kart, kuomet paspaudžiamas [1.] mygtukas');
   {
-    const OwnerDog: ComplectTuple = [{
-      name: 'Name1',
-      age: 25,
-    }, {
-      name: 'Name2',
-      age: 3,
-      brand: 'type1',
-    }];
+    const squareContainer: HTMLDivElement = document.querySelector('#sq-container') as HTMLDivElement;
+    squareContainer.style.width = 'fit-content';
+    const addSquare: EventHandler = () => {
+      const sq: HTMLSpanElement = document.createElement('span');
+      sq.className = 'sq';
+      squareContainer.append(sq);
+      sq.textContent = 'sq';
+    };
 
-    console.log(OwnerDog);
+    btn.addEventListener('click', addSquare);
   }
   console.groupEnd();
 
-  console.group('3. Sukurkite trikampio taškų 2D erdvėje rinkinį(pradžioje teks sukurti 2D Taško tipą)');
+  console.group('3. Sukurkite <p> elementą kuriame spausdinsite skaičių - kiek kvadratėlių yra [2.] konteineryje');
   {
-    const triangle1: Triangle = [[-2, 1], [2, 2], [1, 2]];
-    const triangle2: Triangle = [[1, 2], [4, 2], [4, 1]];
+    const countContainer: HTMLParagraphElement = document.querySelector('#count-container') as HTMLParagraphElement;
 
-    console.log({
-      triangle1,
-      triangle2,
-    });
+    let sqCount: number = 0;
+    const incSqCount: EventHandler = () => {
+      sqCount++;
+      countContainer.innerHTML = `Kvadratų skaičius: ${sqCount}`;
+    };
+
+    btn.addEventListener('click', incSqCount);
   }
   console.groupEnd();
 }

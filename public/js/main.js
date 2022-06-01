@@ -1,44 +1,42 @@
 "use strict";
-const person1 = ['Koridas', 'Atmazas'];
-const person2 = ['Paklodijus', 'Pagalvė'];
-const person3 = ['Višta', 'Maumedienė'];
-let currentAge = 18;
-let currentHeight = 180;
-const age = [currentAge, () => currentAge += 1];
-const height = [currentAge, (h) => {
-        if (h)
-            currentHeight = h;
-    }];
-console.group('Tuples - užduotys');
+const someNumber = 17;
+const title = 'Grace';
+const formAddUser = document.querySelector('#form-add-user');
+formAddUser.onsubmit = (e) => {
+    e.preventDefault();
+    console.log('Ateityje pridėsiu vartotoją');
+};
+console.group('Assertions - užduotys');
 {
-    console.group('1. Sukurkite žmogaus vardo ir amžiaus rinkinį');
+    const btn = document.querySelector('#button');
+    console.group('1. Sukurkite HTML mygtuką ir uždėkite jam įvykio klausiklį, jog paspaudus, būt spausdinamas tekstas "paspausta!"');
     {
-        const personTuple1 = ['Name', 35];
-        const personTuple2 = ['Name2', 45];
-        console.log(personTuple1, personTuple2);
+        const printTextOnClick = () => console.log('paspausta!');
+        btn.addEventListener('click', printTextOnClick);
     }
     console.groupEnd();
-    console.group('2. Sukurkite šuns šeimininko ir šuns rinkinį(pradžioje teks sukurti Šuns ir Šeiminiko tipus)');
+    console.group('2. Sukurkite <div> elementą ir papildikyte jo turinį mažu kvadaratėliu kiekvieną kart, kuomet paspaudžiamas [1.] mygtukas');
     {
-        const OwnerDog = [{
-                name: 'Name1',
-                age: 25,
-            }, {
-                name: 'Name2',
-                age: 3,
-                brand: 'type1',
-            }];
-        console.log(OwnerDog);
+        const squareContainer = document.querySelector('#sq-container');
+        squareContainer.style.width = 'fit-content';
+        const addSquare = () => {
+            const sq = document.createElement('span');
+            sq.className = 'sq';
+            squareContainer.append(sq);
+            sq.textContent = 'sq';
+        };
+        btn.addEventListener('click', addSquare);
     }
     console.groupEnd();
-    console.group('3. Sukurkite trikampio taškų 2D erdvėje rinkinį(pradžioje teks sukurti 2D Taško tipą)');
+    console.group('3. Sukurkite <p> elementą kuriame spausdinsite skaičių - kiek kvadratėlių yra [2.] konteineryje');
     {
-        const triangle1 = [[-2, 1], [2, 2], [1, 2]];
-        const triangle2 = [[1, 2], [4, 2], [4, 1]];
-        console.log({
-            triangle1,
-            triangle2,
-        });
+        const countContainer = document.querySelector('#count-container');
+        let sqCount = 0;
+        const incSqCount = () => {
+            sqCount++;
+            countContainer.innerHTML = `Kvadratų skaičius: ${sqCount}`;
+        };
+        btn.addEventListener('click', incSqCount);
     }
     console.groupEnd();
 }
