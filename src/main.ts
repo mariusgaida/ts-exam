@@ -1,203 +1,164 @@
-type PrimitiveType = string | number | boolean;
+// ↓↓↓ Tipai ↓↓↓
+type ListNode<T> = {
+  data: T,
+  next: ListNode<T> | null
+};
 
-/*
-  Šių pratybų tikslas su išspręsti užduotis panaudojant bendrinius tipus. [1-6]
-  Funkcijų parametrai turi būti bendrinio tipo/ų, pagal kurios būtų suformuojami atsakymai
+type ForEachCallback<T> = (value: T) => void;
+// ↑↑↑ Tipai ↑↑↑
 
-  7 užduotis, skirta savarankiškai išmokti patikrinti tipus:
-  https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
-*/
+// ↓↓↓ Klasės ↓↓↓
+// 1.
+class List<Type> {
+  // 2.
+  private head: ListNode<Type> | null;
 
-const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
-const strings: string[] = ['pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
-const booleans: boolean[] = [true, true, true, true, false];
+  private tail: ListNode<Type> | null;
 
-console.group('1. Parašykite funkciją, kuri grąžina pirmą masyvo elementą.');
-{
-  const firstElem = <Type>(arr: Type[]): Type | undefined => arr[0];
+  // 2.
+  constructor(firstElem?: ListNode<Type>) {
+    if (firstElem !== undefined) {
+      this.head = firstElem;
+      this.tail = firstElem;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+  }
 
-  console.log({ numbers, result: firstElem(numbers) });
-  console.log({ strings, result: firstElem(strings) });
-  console.log({ booleans, result: firstElem(booleans) });
-}
-console.groupEnd();
-
-console.group('2. Parašykite funkciją, kuri grąžina paskutinį masyvo elementą.');
-{
-  const lastElem = <Type>(arr: Type[]): Type | undefined => arr[arr.length - 1];
-
-  console.log({ numbers, result: lastElem(numbers) });
-  console.log({ strings, result: lastElem(strings) });
-  console.log({ booleans, result: lastElem(booleans) });
-}
-console.groupEnd();
-
-console.group('3. Parašykite funkciją, kuri grąžina vienarūšių primityvių reikšmių masyvo kopiją');
-{
-  const exact = <Type extends PrimitiveType>(arr: Type[]): Type[] => {
-    const copy: Type[] = arr.map((x) => x);
-
-    return copy;
+  private addFirstElement = (node: ListNode<Type>) => {
+    this.head = node;
+    this.tail = node;
   };
 
-  console.log({ numbers, result: exact<number>(numbers) });
-  console.log({ strings, result: exact<string>(strings) });
-  console.log({ booleans, result: exact<boolean>(booleans) });
-}
-console.groupEnd();
-
-console.group('4. Parašykite funkciją,  kuri pirmu parametru priima string | number | boolen, grąžina to tipo masyvą su perduota reikšme tiek kartų, kiek nurodyta antru parametru');
-{
-  // ('a', 2) -> ['a', 'a']
-  // (77, 4) -> [77, 77, 77, 77]
-  // (true, 1) -> [true]
-  type ArgumentSample = [PrimitiveType, number];
-
-  const arr = <T extends PrimitiveType>(value: T, count: number): Array<T> => Array.from(new Array(count)).map((_) => value);
-
-  const dataSamples: ArgumentSample[] = [
-    ['a', 2],
-    [77, 4],
-    [true, 1],
-  ];
-
-  dataSamples.forEach(
-    (args) => console.log(
-      `arr(${args.join(', ')}):`,
-      arr(...args),
-    ),
-  );
-}
-console.groupEnd();
-
-console.group('5. Parašykite funkciją, kuri sujungia tokių pat tipų masyvus į vieną masyvą');
-{
-  type ArgumentSample<T> = [T[], T[]];
-
-  const union = <Type>(arr1: Type[], arr2: Type[]): Type[] => [...arr1, ...arr2];
-
-  const args1: ArgumentSample<number> = [[6, 5, 4], [3, 2, 1]];
-  const args2: ArgumentSample<string> = [['text1', 'text2', 'text3'], ['text4', 'text5', 'text6']];
-  const args3: ArgumentSample<boolean> = [[true, true, true], [false, false, false]];
-
-  console.log({ args: args1, result: union(...args1) });
-  console.log({ args: args2, result: union(...args2) });
-  console.log({ args: args3, result: union(...args3) });
-}
-console.groupEnd();
-
-console.group('6. Parašykite funkciją, kuri priimtų bet kokią reikšmę ir grąžintų objektą su savybėmis-funkcijomis "setValue" - reikšmei nustatyti ir "getValue" tai reikšmei nustatyti. Funkcijai perduota reikšmė neturi būti pasiekiama tiesiogiai.');
-{
-  type Type1<Type> = {
-    setValue: (newValue: Type) => void,
-    getValue: () => Type
+  // 3.
+  public addStart = (node: ListNode<Type>): void => {
+    if (this.head === null) {
+      this.addFirstElement(node);
+    } else {
+      node.next = this.head;
+      this.head = node;
+    }
   };
 
-  const getObj = <Type>(initialValue: Type): Type1<Type> => {
-    let value: Type = initialValue;
-
-    return {
-      setValue: (newValue) => value = newValue,
-      getValue: () => value,
-    };
+  // 4.
+  public addEnd = (node: ListNode<Type>): void => {
+    if (this.tail === null) {
+      this.addFirstElement(node);
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+    }
   };
 
-  // Spausdinimas
-  const value1: number = 7;
-  const value2: Array<string> = ['text1', 'text2', 'text3'];
-  const value3: { name: string, surname: string } = { name: 'name', surname: 'surname' };
+  // 5.
+  public forEach = (callback: ForEachCallback<Type>): void => {
+    if (this.head === null) return;
 
-  const obj1 = getObj(value1);
-  const obj2 = getObj(value2);
-  const obj3 = getObj(value3);
+    let thisNode: ListNode<Type> = this.head;
 
-  console.log('initial values');
+    while (true) {
+      callback(thisNode.data);
+      if (thisNode.next === null) break;
+      thisNode = thisNode.next;
+    }
+  };
+}
+// ↑↑↑ Klasės ↑↑↑
+
+// ↓↓↓ Kintamuosius skirtus pavyzdžiams saugokite čia ↓↓↓
+// 1.
+const node1: ListNode<string> = { data: 'test1', next: null };
+const node2: ListNode<string> = { data: 'test2', next: node1 };
+
+// 2. | 3. | 5.
+const stringList: List<string> = new List();
+
+const numberNode: ListNode<number> = { data: 5, next: null };
+const numberList: List<number> = new List(numberNode);
+
+// 3.
+const stringNodeToAdd1: ListNode<string> = { data: 'Serbentautas', next: null };
+const stringNodeToAdd2: ListNode<string> = { data: 'Vardas', next: null };
+const stringNodeToAdd3: ListNode<string> = { data: 'Mano', next: null };
+
+// 4.
+const numberNodeToAdd1: ListNode<number> = { data: 1, next: null };
+const numberNodeToAdd2: ListNode<number> = { data: 2, next: null };
+const numberNodeToAdd3: ListNode<number> = { data: 3, next: null };
+
+// ↑↑↑ Kintamuosius skirtus pavyzdžiam saugokite čia ↑↑↑
+
+console.group('1. Sukurkitę sąrašo mazgo struktūrą ListNode, bet kokiam duomenų tipui');
+{
   console.log({
-    value1: obj1.getValue(),
-    value2: obj2.getValue(),
-    value3: obj3.getValue(),
+    listNode1: node1,
+    listNode2: node2,
   });
-
-  console.log('changing values...');
-  obj1.setValue(9);
-  obj2.setValue(['Pakeista']);
-  obj3.setValue({ name: 'Pakaitalas', surname: 'Fuflo' });
 }
 console.groupEnd();
 
-console.group(`
-  7. Turite 2 tipus: Student ir Worker kurie pasižymi bendrais bruožais Person. 
-  Parašykite 2 funkcijas <isStudent> ir <isWorker> skirtas atpažinti koks objektas buvo perduotas.
-  Sukūrę tokias funkcijas iteruokite per žmonių masyvą, sugrupuodami elementus pagal tipą`);
-// Oficialus būdas patikrinti tipą
-// https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
+console.group('2. Sukurkite sąrašo klasę List');
 {
-  type Person = {
-    name: string,
-    surname: string,
-  };
+  console.log('Tučias string sąrašas');
+  console.log(stringList);
 
-  type Student = Person & {
-    university: string,
-    course: number,
-  };
-
-  type Worker = Person & {
-    avgMonthlyPay: number,
-  };
-
-  type GroupedPeople = {
-    people: Person[],
-    students: Student[],
-    workers: Worker[],
-  };
-
-  const isWorker = (person: Person): person is Worker => (person as Worker).avgMonthlyPay !== undefined;
-
-  const isStudent = (person: Person): person is Student => {
-    const student = person as Student;
-
-    return student.university !== undefined && student.course !== undefined;
-  };
-
-  const combined = (people: Person[]): GroupedPeople => {
-    const groupedPeople = people.reduce<GroupedPeople>((prevGroupedPeople, person) => {
-      const newGroupedPeople = { ...prevGroupedPeople };
-
-      if (isWorker(person)) newGroupedPeople.workers.push(person);
-      if (isStudent(person)) newGroupedPeople.students.push(person);
-      else newGroupedPeople.people.push(person);
-
-      return newGroupedPeople;
-    }, {
-      people: [],
-      students: [],
-      workers: [],
-    });
-
-    return groupedPeople;
-  };
-
-  const people: (Person | Student | Worker)[] = [
-    {
-      name: 'Name1', surname: 'Surname1', university: 'VU', course: 3,
-    },
-    { name: 'Name2', surname: 'Surname2' },
-    { name: 'Name3', surname: 'Surname3', avgMonthlyPay: 1500 },
-    { name: 'Name4', surname: 'Surname4' },
-    { name: 'Name5', surname: 'Surname5', avgMonthlyPay: 800 },
-    {
-      name: 'Name6', surname: 'Surname6', university: 'VU', course: 2,
-    },
-    { name: 'Name7', surname: 'Surname7', avgMonthlyPay: 2500 },
-    {
-      name: 'Name8', surname: 'Surname8', university: 'KTU', course: 1,
-    },
-  ];
-
-  // (Person | Student | Worker)[] === Person[] ????
-  // https://www.javatpoint.com/typescript-duck-typing
-  const groupedPeople = combined(people);
-
-  console.log(groupedPeople);
+  console.log('number sąrašas');
+  console.log(numberList);
 }
+console.groupEnd();
+
+console.group('3. Sukurkite metodą pridėti sąrašo elementui į sąrašo priekį.');
+{
+  console.log('String sąrašas');
+  console.log(stringList);
+
+  console.log('Pridedamas Mazgas 1', stringNodeToAdd1);
+  stringList.addStart(stringNodeToAdd1);
+  console.log('Sąrašas po pridėjimo', { ...stringList });
+
+  console.log('Pridedamas Mazgas 2', stringNodeToAdd2);
+  stringList.addStart(stringNodeToAdd2);
+  console.log('Sąrašas po pridėjimo', { ...stringList });
+
+  console.log('Pridedamas Mazgas 3', stringNodeToAdd3);
+  stringList.addStart(stringNodeToAdd3);
+  console.log('Sąrašas po pridėjimo', { ...stringList });
+}
+console.groupEnd();
+
+console.group('4. Sukurkite metodą pridėti sąrašo elementui į sąrašo priekį.');
+{
+  console.log('String sąrašas');
+  console.log(numberList);
+
+  console.log('Pridedamas Mazgas 1', numberNodeToAdd1);
+  numberList.addEnd(numberNodeToAdd1);
+  console.log('Sąrašas po pridėjimo', { ...numberList });
+
+  console.log('Pridedamas Mazgas 2', numberNodeToAdd2);
+  numberList.addEnd(numberNodeToAdd2);
+  console.log('Sąrašas po pridėjimo', { ...numberList });
+
+  console.log('Pridedamas Mazgas 3', numberNodeToAdd3);
+  numberList.addEnd(numberNodeToAdd3);
+  console.log('Sąrašas po pridėjimo', { ...numberList });
+}
+console.groupEnd();
+
+console.group('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų parametru perduotą funkciją');
+{
+  console.log('string sąrašo spausdinimas');
+  stringList.forEach((str) => console.log(str));
+
+  const stringArr: string[] = [];
+  const putInStringArr = (x: number): void => {
+    stringArr.push(String(x));
+  };
+
+  console.log('number sąrašo spausdinimas');
+  numberList.forEach(putInStringArr);
+  const numberListStringRepresentation: string = stringArr.join(' → ');
+  console.log(numberListStringRepresentation);
+}
+console.groupEnd();
