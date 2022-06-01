@@ -1,179 +1,81 @@
 "use strict";
-const numbers = [1, 2, -2, 6, -5, 9, 1.02, 45, -69, 77, -12, 2, 8, -2, -4, 59, 7, -3];
-const words = ['pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis', 'šeštadienis', 'sekmadienis'];
-console.group('1. Parašykite funkciją, kuri atspausdina paskutinio masyvo elemento indeksą');
-{
-    function solution(arr) {
-        console.log(arr.length - 1);
+const id1 = '1321354';
+const id2 = 17;
+const id3 = 47;
+const id4 = 'asdasdas';
+const id5 = 47;
+const id6 = 'sdfsdfdsfsdf';
+const id7 = true;
+const call = (callee) => {
+    if (typeof callee === 'string') {
+        console.log('Skambinama:', callee);
     }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('2. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indeksus eilutėmis');
-{
-    function solution(arr) {
-        for (let i = 0; i < arr.length; i++)
-            console.log(i);
+    else {
+        console.log('Skambinama:', callee.mobile);
     }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('3. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento reikšmes eilutėmis');
+};
+const data1 = [1, 5, 'burundukas', 8, 'siurprizas', 7];
+const data2 = [1, 5, 'burundukas', 8, 'siurprizas', 7];
+const flags1 = [1, 1, 0, 0, 0, 1, 1];
+const flags2 = [true, false, false, true, true];
+console.group('Union operators - užduotys');
 {
-    function solution(arr) {
-        for (let i = 0; i < arr.length; i++)
-            console.log(arr[i]);
+    console.group('1. Aprašykite objekto tipą Accommodation, kurio savybė "type" būtų, "House" arba "Flat"');
+    {
+        const accommodation1 = {
+            address: 'Adress1',
+            type: 'House',
+        };
+        const accommodation2 = {
+            address: 'Adress2',
+            type: 'House',
+        };
+        console.log({
+            accommodation1,
+            accommodation2,
+        });
     }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('4. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indekso ir reikšmių poras eilutėmis, tokiu formatu:  ');
-{
-    function solution(arr) {
-        for (let i = 0; i < arr.length; i++)
-            console.log(`[${i}] => ${arr[i]}`);
+    console.groupEnd();
+    console.group('2. Aprašykite objekto tipą Car, kurio savybė "transmission" būtų, "Automatic" arba "Manual"');
+    {
+        const car1 = {
+            brand: 'Brand1',
+            model: 'Model1',
+            transmission: 'Automatic',
+        };
+        const car2 = {
+            brand: 'Brand2',
+            model: 'Model2',
+            transmission: 'Manual',
+        };
+        console.log({
+            car1,
+            car2,
+        });
     }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('5. Parašykite funkciją, kuri atspausdina masyvo elementus atbuline tvarka eilutėmis, iš galo.');
-{
-    function solution(arr) {
-        for (let i = arr.length - 1; i >= 0; i--)
-            console.log(arr[i]);
+    console.groupEnd();
+    console.group('3. Aprašykite tipą, kuris kintamajam leistų būti: arba Accommodation masyvu, arba Car masyvu');
+    {
+        const array1 = [{
+                address: 'Adress1',
+                type: 'House',
+            }, {
+                address: 'Adress2',
+                type: 'Flat',
+            }];
+        const array2 = [{
+                brand: 'Brand1',
+                model: 'Model1',
+                transmission: 'Automatic',
+            }, {
+                brand: 'Brand2',
+                model: 'Model2',
+                transmission: 'Manual',
+            }];
+        console.table(array1);
+        console.table(array2);
     }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('6. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indeksus vienoje eilutėje: 0 1 2 3 ...');
-{
-    function solution(arr) {
-        const res = arr.map((_, i) => i).join(' ');
-        console.log(res);
-    }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('7. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento reikšmes vienoje eilutėje: -111 2 -9 48 ...');
-{
-    function solution(arr) {
-        const res = arr.join(' ');
-        console.log(res);
-    }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('8. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indekso ir reikšmių poras vienoje eilutėje, tokiu formatu:');
-{
-    function solution(arr) {
-        const res = arr.map((x, i) => `[${i}]=>${x}`).join(', ');
-        console.log(res);
-    }
-    console.log(numbers);
-    solution(numbers);
-    console.log(words);
-    solution(words);
-}
-console.groupEnd();
-console.group('9. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų padaugintų iš 2');
-{
-    function solution(arr) {
-        return arr.map((x) => x * 2);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('10. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų pakeltų kvadratu');
-{
-    function solution(arr) {
-        return arr.map((x) => x ** 2);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('11. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo elementų ir jų indeksų sandaugos');
-{
-    function solution(arr) {
-        return arr.map((x, i) => x * i);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('12. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo teigiamų elementų');
-{
-    function solution(arr) {
-        return arr.filter((x) => x > 0);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('13. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo NE-teigiamų elementų');
-{
-    function solution(arr) {
-        return arr.filter((x) => x <= 0);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('14. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo lyginių elementų');
-{
-    function solution(arr) {
-        return arr.filter((x) => x % 2 === 0);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('15. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo nelyginių elementų');
-{
-    function solution(arr) {
-        return arr.filter((x) => Math.abs(x) % 2 === 1);
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
-}
-console.groupEnd();
-console.group('16. Sukurkite funkciją, kuri priima skaičių masyvą ir grąžina naują masyvą sudarytą iš pradinio masyvo, paverstų teigiamais, elementų');
-{
-    function solution(arr) {
-        return arr.map((x) => (x < 0 ? x * -1 : x));
-    }
-    const result = solution(numbers);
-    console.log(numbers);
-    console.log(result);
+    console.groupEnd();
 }
 console.groupEnd();
 //# sourceMappingURL=main.js.map
