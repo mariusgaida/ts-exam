@@ -1,79 +1,44 @@
 "use strict";
-const id1 = '1321354';
-const id2 = 17;
-const id3 = 47;
-const id4 = 'asdasdas';
-const id5 = 47;
-const id6 = 'sdfsdfdsfsdf';
-const id7 = true;
-const call = (callee) => {
-    if (typeof callee === 'string') {
-        console.log('Skambinama:', callee);
-    }
-    else {
-        console.log('Skambinama:', callee.mobile);
-    }
-};
-const data1 = [1, 5, 'burundukas', 8, 'siurprizas', 7];
-const data2 = [1, 5, 'burundukas', 8, 'siurprizas', 7];
-const flags1 = [1, 1, 0, 0, 0, 1, 1];
-const flags2 = [true, false, false, true, true];
-console.group('Union operators - užduotys');
+const person1 = ['Koridas', 'Atmazas'];
+const person2 = ['Paklodijus', 'Pagalvė'];
+const person3 = ['Višta', 'Maumedienė'];
+let currentAge = 18;
+let currentHeight = 180;
+const age = [currentAge, () => currentAge += 1];
+const height = [currentAge, (h) => {
+        if (h)
+            currentHeight = h;
+    }];
+console.group('Tuples - užduotys');
 {
-    console.group('1. Aprašykite objekto tipą Accommodation, kurio savybė "type" būtų, "House" arba "Flat"');
+    console.group('1. Sukurkite žmogaus vardo ir amžiaus rinkinį');
     {
-        const accommodation1 = {
-            address: 'Adress1',
-            type: 'House',
-        };
-        const accommodation2 = {
-            address: 'Adress2',
-            type: 'House',
-        };
-        console.log({
-            accommodation1,
-            accommodation2,
-        });
+        const personTuple1 = ['Name', 35];
+        const personTuple2 = ['Name2', 45];
+        console.log(personTuple1, personTuple2);
     }
     console.groupEnd();
-    console.group('2. Aprašykite objekto tipą Car, kurio savybė "transmission" būtų, "Automatic" arba "Manual"');
+    console.group('2. Sukurkite šuns šeimininko ir šuns rinkinį(pradžioje teks sukurti Šuns ir Šeiminiko tipus)');
     {
-        const car1 = {
-            brand: 'Brand1',
-            model: 'Model1',
-            transmission: 'Automatic',
-        };
-        const car2 = {
-            brand: 'Brand2',
-            model: 'Model2',
-            transmission: 'Manual',
-        };
-        console.log({
-            car1,
-            car2,
-        });
+        const OwnerDog = [{
+                name: 'Name1',
+                age: 25,
+            }, {
+                name: 'Name2',
+                age: 3,
+                brand: 'type1',
+            }];
+        console.log(OwnerDog);
     }
     console.groupEnd();
-    console.group('3. Aprašykite tipą, kuris kintamajam leistų būti: arba Accommodation masyvu, arba Car masyvu');
+    console.group('3. Sukurkite trikampio taškų 2D erdvėje rinkinį(pradžioje teks sukurti 2D Taško tipą)');
     {
-        const array1 = [{
-                address: 'Adress1',
-                type: 'House',
-            }, {
-                address: 'Adress2',
-                type: 'Flat',
-            }];
-        const array2 = [{
-                brand: 'Brand1',
-                model: 'Model1',
-                transmission: 'Automatic',
-            }, {
-                brand: 'Brand2',
-                model: 'Model2',
-                transmission: 'Manual',
-            }];
-        console.table(array1);
-        console.table(array2);
+        const triangle1 = [[-2, 1], [2, 2], [1, 2]];
+        const triangle2 = [[1, 2], [4, 2], [4, 1]];
+        console.log({
+            triangle1,
+            triangle2,
+        });
     }
     console.groupEnd();
 }
