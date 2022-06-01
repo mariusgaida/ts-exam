@@ -1,44 +1,78 @@
 "use strict";
-const country = 'Latvia';
-const country2 = 'Estonia';
-const req1 = {
-    url: 'https://tavo-veidas.lt',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    method: 'GET',
-};
-const req2 = {
-    url: 'https://tavo-veidas.lt/api/',
-    headers: {
-        Authorization: 'Bearer fhdguisdf8g76sdf89ghf5..?sfg',
-        'Content-Type': 'application/json',
-    },
-    body: {
-        image: 'https://i.pinimg.com/474x/67/0a/1d/670a1d06e7bff426ec343e8c06c93ca5--crazy-faces-strange-people.jpg',
-    },
-    method: 'POST',
-};
-console.group('Literal types - užduotys');
+var WeekDays;
+(function (WeekDays) {
+    WeekDays[WeekDays["Monday"] = 1] = "Monday";
+    WeekDays[WeekDays["Tuesday"] = 2] = "Tuesday";
+    WeekDays[WeekDays["Wednesday"] = 3] = "Wednesday";
+    WeekDays[WeekDays["Thursday"] = 4] = "Thursday";
+    WeekDays[WeekDays["Friday"] = 5] = "Friday";
+    WeekDays[WeekDays["Saturday"] = 6] = "Saturday";
+    WeekDays[WeekDays["Sunday"] = 7] = "Sunday";
+})(WeekDays || (WeekDays = {}));
+var Answer;
+(function (Answer) {
+    Answer[Answer["No"] = 0] = "No";
+    Answer[Answer["Yes"] = 1] = "Yes";
+})(Answer || (Answer = {}));
+var WeekDayNamesLT;
+(function (WeekDayNamesLT) {
+    WeekDayNamesLT["Monday"] = "pirmadienis";
+    WeekDayNamesLT["Tuesday"] = "antradienis";
+    WeekDayNamesLT["Wednesday"] = "tre\u010Diadienis";
+    WeekDayNamesLT["Thursday"] = "ketvirtadienis";
+    WeekDayNamesLT["Friday"] = "penktadienis";
+    WeekDayNamesLT["Saturday"] = "\u0161e\u0161tadienis";
+    WeekDayNamesLT["Sunday"] = "sekmadienis";
+})(WeekDayNamesLT || (WeekDayNamesLT = {}));
+console.group('enums types - užduotys');
 {
-    console.group('1. Sukurkite konkrečius 5 dižiausių Vokietijos miestų tipus. Sukurkite tipą, kurio reikšmė būtų viena iš miestų.');
+    let LTCity;
+    (function (LTCity) {
+        LTCity["Vilnius"] = "Vilnius";
+        LTCity["Kaunas"] = "Kaunas";
+        LTCity["Klaipeda"] = "Klaipeda";
+        LTCity["Siauliai"] = "Siauliai";
+        LTCity["Panevezys"] = "Panevezys";
+    })(LTCity || (LTCity = {}));
+    let Countries;
+    (function (Countries) {
+        Countries[Countries["China"] = 0] = "China";
+        Countries[Countries["India"] = 1] = "India";
+        Countries[Countries["UnitedStates"] = 2] = "UnitedStates";
+        Countries[Countries["Indonesia"] = 3] = "Indonesia";
+        Countries[Countries["Pakistan"] = 4] = "Pakistan";
+    })(Countries || (Countries = {}));
+    let BiggestGDP;
+    (function (BiggestGDP) {
+        BiggestGDP[BiggestGDP["UnitedStates"] = 1] = "UnitedStates";
+        BiggestGDP[BiggestGDP["China"] = 2] = "China";
+        BiggestGDP[BiggestGDP["Japan"] = 3] = "Japan";
+        BiggestGDP[BiggestGDP["Germany"] = 4] = "Germany";
+        BiggestGDP[BiggestGDP["UnitedKingdom"] = 5] = "UnitedKingdom";
+    })(BiggestGDP || (BiggestGDP = {}));
+    console.group('1. Sukurkite 5 didžiausių Lietuvos miestų išvardinimą.');
     {
-        const city1 = 'Munich';
-        const city2 = 'Hamburg';
+        const city1 = LTCity.Kaunas;
+        const city2 = LTCity.Klaipeda;
         console.log({ city1, city2 });
     }
     console.groupEnd();
-    console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
+    console.group('2. Sukurkite 5 šalių su didžiausiu gyventojų skaičiumi skaitinį išvardinimą.');
     {
-        const breed1 = 'Dalmantin';
-        const breed2 = 'Mops';
-        console.log({ breed1, breed2 });
+        const largestCountries = [Countries.China, Countries.Pakistan];
+        console.log(largestCountries);
     }
     console.groupEnd();
-    console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
+    console.group('3. Sukurkite 5 šalių su didžiausiu BVP skaitinį išvardinimą pradedant "1".');
     {
-        const parts = ['Engine', 'Wheel', 'Trasmission'];
-        console.log(parts);
+        const EconomiesGDP = [
+            BiggestGDP.UnitedStates,
+            BiggestGDP.China,
+            BiggestGDP.Japan,
+            BiggestGDP.Germany,
+            BiggestGDP.UnitedKingdom,
+        ];
+        console.log(EconomiesGDP);
     }
     console.groupEnd();
 }

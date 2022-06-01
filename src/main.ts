@@ -1,94 +1,95 @@
-type Latvia = 'Latvia';
-type Lithuania = 'Lithuania';
-type Estonia = 'Estonia';
-const country: Latvia = 'Latvia';
+/*
+  Enum(išvardinimas) - tai konstantų rinkinys.
+  Enum(išvardinimai) yra naudojami įvardinti tipams ar nustatymams.
+  Jų reikšmės dažniau naudojamos tipo patikrinimams, nei atvazdavimui.
+*/
 
-type BalticCountry = Latvia | Lithuania | Estonia;
-const country2 = 'Estonia';
+// Skaitiniai išvardinimai (numeric enums)
+// Nurodžius pirmajai konstantai reikšmę, sekančios susinumeruoja pradedant nurodyta reikšme
+enum WeekDays {
+  Monday = 1,
+  Tuesday, // 2
+  Wednesday, // 3
+  Thursday, // 4
+  Friday, // 5
+  Saturday, // 6
+  Sunday, // 7
+}
 
-type HttpType = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+// Jei nenurodote pirmosios reikšmės, numeruojama nuo 0
+enum Answer {
+  No, // 0
+  Yes, // 1
+}
 
-type HttpRequest = {
-  url: string,
-  headers?: {
-    [key: string]: string,
-  },
-  body?: {
-    [key: string]: string,
-  }
-  method: HttpType,
-};
-
-const req1 = {
-  url: 'https://tavo-veidas.lt',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  method: 'GET',
-};
-
-const req2 = {
-  url: 'https://tavo-veidas.lt/api/',
-  headers: {
-    Authorization: 'Bearer fhdguisdf8g76sdf89ghf5..?sfg',
-    'Content-Type': 'application/json',
-  },
-  body: {
-    image: 'https://i.pinimg.com/474x/67/0a/1d/670a1d06e7bff426ec343e8c06c93ca5--crazy-faces-strange-people.jpg',
-  },
-  method: 'POST',
-};
+// Jei išvardinamų konstantų tipas yra ne skaičius, privalote įvardinti kiekvieną narį
+enum WeekDayNamesLT {
+  Monday = 'pirmadienis',
+  Tuesday = 'antradienis',
+  Wednesday = 'trečiadienis',
+  Thursday = 'ketvirtadienis',
+  Friday = 'penktadienis',
+  Saturday = 'šeštadienis',
+  Sunday = 'sekmadienis',
+}
 
 // Alikite užduotis, ir atspausdinkite savo sprendimo pavyzdžius užduoties blokuose
-console.group('Literal types - užduotys');
+console.group('enums types - užduotys');
 {
-  // ↓↓↓↓ Tipus ir užduotims bendrus kintamuosius apraškite čia ↓↓↓↓
-  type Berlin = 'Berlin';
-  type Hamburg = 'Hamburg';
-  type Munich = 'Munich';
-  type Cologne = 'Cologne';
-  type Frankfurt = 'Frankfurt';
-  type GermanyCity = Berlin | Hamburg | Munich | Cologne | Frankfurt;
+  // ↓↓↓↓ Tipus ir užduotims bendrus kintamuosius aprašykite čia ↓↓↓↓
+  enum LTCity {
+    Vilnius = 'Vilnius',
+    Kaunas = 'Kaunas',
+    Klaipeda = 'Klaipeda',
+    Siauliai = 'Siauliai',
+    Panevezys = 'Panevezys',
+  }
 
-  type Doberman = 'Doberman';
-  type ChowChow = 'ChowChow';
-  type Dalmantin = 'Dalmantin';
-  type Buldog = 'Buldog';
-  type Mops = 'Mops';
-  type Breed = Doberman | ChowChow | Dalmantin | Buldog | Mops;
+  enum Countries {
+    China,
+    India,
+    UnitedStates,
+    Indonesia,
+    Pakistan,
+  }
 
-  type Engine = 'Engine';
-  type Trasmission = 'Trasmission';
-  type Wheel = 'Wheel';
-  type FuelTank = 'FuelTank';
-  type FuelFilter = 'FuelFilter';
-  type CarPart = Engine | Trasmission | Wheel | FuelTank | FuelFilter;
+  enum BiggestGDP {
+    UnitedStates = 1,
+    China,
+    Japan,
+    Germany,
+    UnitedKingdom,
+  }
+  // ↑↑↑↑ Tipus ir užduotims bendrus kintamuosius aprašykite čia ↑↑↑↑
 
-  // ↑↑↑↑ Tipus ir užduotims bendrus kintamuosius apraškite čia ↑↑↑↑
-
-  console.group('1. Sukurkite konkrečius 5 dižiausių Vokietijos miestų tipus. Sukurkite tipą, kurio reikšmė būtų viena iš miestų.');
+  console.group('1. Sukurkite 5 didžiausių Lietuvos miestų išvardinimą.');
   {
-    const city1: GermanyCity = 'Munich';
-    const city2: GermanyCity = 'Hamburg';
+    const city1: LTCity = LTCity.Kaunas;
+    const city2: LTCity = LTCity.Klaipeda;
 
     console.log({ city1, city2 });
   }
   console.groupEnd();
 
-  console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
+  console.group('2. Sukurkite 5 šalių su didžiausiu gyventojų skaičiumi skaitinį išvardinimą.');
   {
-    const breed1: Breed = 'Dalmantin';
-    const breed2: Breed = 'Mops';
+    const largestCountries: Countries[] = [Countries.China, Countries.Pakistan];
 
-    console.log({ breed1, breed2 });
+    console.log(largestCountries);
   }
   console.groupEnd();
 
-  console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
+  console.group('3. Sukurkite 5 šalių su didžiausiu BVP skaitinį išvardinimą pradedant "1".');
   {
-    const parts: CarPart[] = ['Engine', 'Wheel', 'Trasmission'];
+    const EconomiesGDP: BiggestGDP[] = [
+      BiggestGDP.UnitedStates,
+      BiggestGDP.China,
+      BiggestGDP.Japan,
+      BiggestGDP.Germany,
+      BiggestGDP.UnitedKingdom,
+    ];
 
-    console.log(parts);
+    console.log(EconomiesGDP);
   }
   console.groupEnd();
 }
