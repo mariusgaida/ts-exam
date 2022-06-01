@@ -1,80 +1,194 @@
 "use strict";
-var WeekDays;
-(function (WeekDays) {
-    WeekDays[WeekDays["Monday"] = 1] = "Monday";
-    WeekDays[WeekDays["Tuesday"] = 2] = "Tuesday";
-    WeekDays[WeekDays["Wednesday"] = 3] = "Wednesday";
-    WeekDays[WeekDays["Thursday"] = 4] = "Thursday";
-    WeekDays[WeekDays["Friday"] = 5] = "Friday";
-    WeekDays[WeekDays["Saturday"] = 6] = "Saturday";
-    WeekDays[WeekDays["Sunday"] = 7] = "Sunday";
-})(WeekDays || (WeekDays = {}));
-var Answer;
-(function (Answer) {
-    Answer[Answer["No"] = 0] = "No";
-    Answer[Answer["Yes"] = 1] = "Yes";
-})(Answer || (Answer = {}));
-var WeekDayNamesLT;
-(function (WeekDayNamesLT) {
-    WeekDayNamesLT["Monday"] = "pirmadienis";
-    WeekDayNamesLT["Tuesday"] = "antradienis";
-    WeekDayNamesLT["Wednesday"] = "tre\u010Diadienis";
-    WeekDayNamesLT["Thursday"] = "ketvirtadienis";
-    WeekDayNamesLT["Friday"] = "penktadienis";
-    WeekDayNamesLT["Saturday"] = "\u0161e\u0161tadienis";
-    WeekDayNamesLT["Sunday"] = "sekmadienis";
-})(WeekDayNamesLT || (WeekDayNamesLT = {}));
-console.group('enums types - užduotys');
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+const people = [
+    {
+        name: 'Jonas',
+        surname: 'Jonaitis',
+        sex: 'male',
+        age: 26,
+        income: 1200,
+        married: false,
+        hasCar: false,
+    },
+    {
+        name: 'Severija',
+        surname: 'Piktutytė',
+        sex: 'female',
+        age: 26,
+        income: 1300,
+        married: false,
+        hasCar: true,
+    },
+    {
+        name: 'Valdas',
+        surname: 'Vilktorinas',
+        sex: 'male',
+        age: 16,
+        income: 0,
+        married: false,
+        hasCar: false,
+    },
+    {
+        name: 'Virginijus',
+        surname: 'Uostauskas',
+        sex: 'male',
+        age: 32,
+        income: 2400,
+        married: true,
+        hasCar: true,
+    },
+    {
+        name: 'Samanta',
+        surname: 'Uostauskienė',
+        sex: 'female',
+        age: 28,
+        income: 1200,
+        married: true,
+        hasCar: true,
+    },
+    {
+        name: 'Janina',
+        surname: 'Stalautinskienė',
+        sex: 'female',
+        age: 72,
+        income: 364,
+        married: false,
+        hasCar: false,
+    },
+];
+console.groupCollapsed('1. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {name: string, surname: string} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą');
 {
-    let LTCity;
-    (function (LTCity) {
-        LTCity["Vilnius"] = "Vilnius";
-        LTCity["Kaunas"] = "Kaunas";
-        LTCity["Klaipeda"] = "Klaipeda";
-        LTCity["Siauliai"] = "Siauliai";
-        LTCity["Panevezys"] = "Panevezys";
-    })(LTCity || (LTCity = {}));
-    let Countries;
-    (function (Countries) {
-        Countries[Countries["China"] = 0] = "China";
-        Countries[Countries["India"] = 1] = "India";
-        Countries[Countries["UnitedStates"] = 2] = "UnitedStates";
-        Countries[Countries["Indonesia"] = 3] = "Indonesia";
-        Countries[Countries["Pakistan"] = 4] = "Pakistan";
-    })(Countries || (Countries = {}));
-    let BiggestGDP;
-    (function (BiggestGDP) {
-        BiggestGDP[BiggestGDP["UnitedStates"] = 1] = "UnitedStates";
-        BiggestGDP[BiggestGDP["China"] = 2] = "China";
-        BiggestGDP[BiggestGDP["Japan"] = 3] = "Japan";
-        BiggestGDP[BiggestGDP["Germany"] = 4] = "Germany";
-        BiggestGDP[BiggestGDP["UnitedKingdom"] = 5] = "UnitedKingdom";
-    })(BiggestGDP || (BiggestGDP = {}));
-    console.group('1. Sukurkite 5 didžiausių Lietuvos miestų išvardinimą.');
-    {
-        const city1 = LTCity.Kaunas;
-        const city2 = LTCity.Klaipeda;
-        console.log({ city1, city2 });
-    }
-    console.groupEnd();
-    console.group('2. Sukurkite 5 šalių su didžiausiu gyventojų skaičiumi skaitinį išvardinimą.');
-    {
-        const largestCountries = [Countries.China, Countries.Pakistan];
-        console.log(largestCountries);
-    }
-    console.groupEnd();
-    console.group('3. Sukurkite 5 šalių su didžiausiu BVP skaitinį išvardinimą pradedant "1".');
-    {
-        const EconomiesGDP = [
-            BiggestGDP.UnitedStates,
-            BiggestGDP.China,
-            BiggestGDP.Japan,
-            BiggestGDP.Germany,
-            BiggestGDP.UnitedKingdom,
-        ];
-        console.log(EconomiesGDP);
-    }
-    console.groupEnd();
+    const personToIdentity = ({ name, surname }) => ({ name, surname });
+    const identities = people.map(personToIdentity);
+    console.table(people);
+    console.table(identities);
+}
+console.groupEnd();
+console.groupCollapsed('2. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {married: boolean, hasCar: boolean} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą.');
+{
+    const selectTaskProps = ({ married, hasCar }) => ({
+        married: Boolean(married),
+        hasCar: Boolean(hasCar),
+    });
+    const result = people.map(selectTaskProps);
+    console.table(people);
+    console.table(result);
+}
+console.groupEnd();
+console.groupCollapsed('3. Sukurtite masyvą su vardais, pavardėmis ir lytimi, pagal pradinį žmonių masyvą');
+{
+    const selectTaskProps = ({ name, surname, sex }) => ({
+        name, surname, sex,
+    });
+    const result = people.map(selectTaskProps);
+    console.table(people);
+    console.table(result);
+}
+console.groupEnd();
+console.groupCollapsed('4. Suformuokite visų vyrų masyvą');
+{
+    const isMale = ({ sex }) => sex === 'male';
+    const males = people.filter(isMale);
+    console.table(people);
+    console.table(males);
+}
+console.groupEnd();
+console.groupCollapsed('5. Suformuokite visų moterų masyvą');
+{
+    const isFemale = ({ sex }) => sex === 'female';
+    const females = people.filter(isFemale);
+    console.table(people);
+    console.table(females);
+}
+console.groupEnd();
+console.groupCollapsed('6. Suformuokite objektų masyvą su žmonių vardais ir pavardėm, kurie turi mašinas');
+{
+    const personHasCar = ({ hasCar }) => Boolean(hasCar);
+    const createIdentity = ({ name, surname }) => ({ name, surname });
+    const identityReducer = (result, { hasCar, name, surname }) => {
+        if (hasCar)
+            result.push({ name, surname });
+        return result;
+    };
+    const peopleWithCars = people.filter(personHasCar);
+    const indentities = peopleWithCars.map(createIdentity);
+    const identitiess2 = people.reduce(identityReducer, []);
+    console.table(people);
+    console.table(indentities);
+    console.table(identitiess2);
+}
+console.groupEnd();
+console.groupCollapsed('7. Suformuokite objektų masyvą iš žmonių kurie yra susituokę');
+{
+    const marriedReducer = (result, person) => {
+        if (person.married)
+            result.push(person);
+        return result;
+    };
+    const marriedPeople = people.reduce(marriedReducer, []);
+    console.table(people);
+    console.table(marriedPeople);
+}
+console.groupEnd();
+console.groupCollapsed('8. Sukurkite objektą, kuriame būtų apskaičiuotas vairuojančių žmonių kiekis pagal lytį');
+{
+    const groupCarOwnersBySexReducer = (result, person) => {
+        if (!person.hasCar)
+            return result;
+        if (!result[person.sex])
+            result[person.sex] = 0;
+        result[person.sex] = result[person.sex] + 1;
+        return result;
+    };
+    const groupedPeopleBySex = people.reduce(groupCarOwnersBySexReducer, {});
+    console.table(people);
+    console.log(groupedPeopleBySex);
+}
+console.groupEnd();
+console.groupCollapsed('9. Performuokite žmonių masyvą, jog kiekvieno žmogaus savybė "income", taptų "salary"');
+{
+    const convertToBritish = (_a) => {
+        var { income } = _a, person = __rest(_a, ["income"]);
+        const result = Object.assign({}, person);
+        if (income)
+            result.salary = income;
+        return result;
+    };
+    const britishPeople = people.map(convertToBritish);
+    console.table(people);
+    console.table(britishPeople);
+}
+console.groupEnd();
+console.groupCollapsed('10. Suformuokite žmonių masyvą, kuriame nebūtų lyties, vardo ir pavardės');
+{
+    const createAnonymous = (_a) => {
+        var { name, surname, sex } = _a, anonPerson = __rest(_a, ["name", "surname", "sex"]);
+        return anonPerson;
+    };
+    const anonymousPeople = people.map(createAnonymous);
+    console.table(people);
+    console.table(anonymousPeople);
+}
+console.groupEnd();
+console.groupCollapsed('11. Suformuokite žmonių masyvą, kuriame "name" ir "surname" savybės, būtų pakeistos "fullname" savybe');
+{
+    const createFullnamePerson = (_a) => {
+        var { name, surname } = _a, rest = __rest(_a, ["name", "surname"]);
+        return (Object.assign(Object.assign({}, rest), { fullname: `${name} ${surname}` }));
+    };
+    const fullnamePeople = people.map(createFullnamePerson);
+    console.table(people);
+    console.table(fullnamePeople);
 }
 console.groupEnd();
 //# sourceMappingURL=main.js.map
